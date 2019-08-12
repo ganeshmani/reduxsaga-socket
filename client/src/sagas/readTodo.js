@@ -26,13 +26,18 @@ function* read(socket) {
   const channel = yield call(subscribe, socket);
   while (true) {
     let action = yield take(channel);
+    console.log("action",action);
     yield put(action);
   }
 }
 
 export function* subscribe(socket) {
   return new eventChannel(emit => {
-    const update = todos => emit(onTodoAdded(todos))
+    const update = todos => {
+      console.log("listened data",todos);
+      return  emit(onTodoAdded(todos));
+    }
+    console.log("socket listening on get-todos");
     socket.on('get-todos', update)
     return () => {}
   })

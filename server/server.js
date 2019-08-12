@@ -24,13 +24,13 @@ mongoose.connect(`mongodb://localhost:27017/sockettodo`,{ useNewUrlParser : true
 
         console.log('mongodb connected successfully');
 
-        io.on('connection',async (socket) => {
+        io.sockets.on('connection',async (socket) => {
 
             console.log("Socket Connected");
 
             const todoCollection = await TodoModel.getTodos();
 
-            socket.emit('get-todos',{ todos : todoCollection });
+            io.sockets.emit('get-todos',{ todos : todoCollection });
 
 
             socket.on('insert-todo',async (data) => {
@@ -38,8 +38,8 @@ mongoose.connect(`mongodb://localhost:27017/sockettodo`,{ useNewUrlParser : true
                 await TodoModel.insertTodo(data);
 
                 const todoCollection = await TodoModel.getTodos();
-
-                socket.emit('get-todos',{ todos : todoCollection  })
+                console.log("todoCollection",todoCollection);
+                io.sockets.emit('get-todos',{ todos : todoCollection  })
             })
         })
 
