@@ -4,14 +4,20 @@ import {
   GET_TODOS
   ,ADD_TODO_SUCCESS
   ,ADD_TODO_FAILRE
-} from '../actions/actionTypes'
+} from '../actions/actionTypes';
+
+import  {
+  onTodoAdded
+} from '../actions/todoAction'
 import {write} from './write'
+import io from 'socket.io-client';
 
 function connect() {
   const socket = io('http://localhost:4123/');
   return new Promise(resolve => {
     socket.on('connect', () => {
       resolve(socket);
+      console.log("Socket connected");
     });
   });
 }

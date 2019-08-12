@@ -7,6 +7,8 @@ import TodoInput from './components/TodoInput';
 import { GET_TODOS } from './actions/actionTypes';
 
 import { connect } from 'react-redux'
+
+import TodoList from './components/TodoList'
 function App(props) {
 
   useEffect(() => {
@@ -17,6 +19,7 @@ function App(props) {
     <div className="App">
         <TodoInput />
 
+        <TodoList />
 
     </div>
   );
@@ -26,7 +29,7 @@ const mapToState = state => ({
   todos : state.todos
 })
 
-const mapToDispatch = dipatch => ({
+const mapToDispatch = dispatch => ({
   start: () => dispatch({
     type: GET_TODOS
   })

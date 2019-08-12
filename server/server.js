@@ -1,22 +1,30 @@
 const express = require('express');
-const io = require('socket.io');
+
 const mongoose = require('mongoose');
 const http = require('http');
 
 const app = express()
 
-const server = http.Server(app);
+// const server = http.createServer(app);
 
-const socketIO = io(server);
+const server = app.listen(4123);
+
+const io = require('socket.io').listen(server);
 
 const TodoModel = require('./TodoModel');
 
-mongoose.connect(`mongodb://localhost:27017`,{ useNewUrlParser : true })
+app.use(function(request, response, next) {
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
+mongoose.connect(`mongodb://localhost:27017/sockettodo`,{ useNewUrlParser : true })
     .then((err,res) => {
 
         console.log('mongodb connected successfully');
 
-        socketIO.on('connection',async (socket) => {
+        io.on('connection',async (socket) => {
 
             console.log("Socket Connected");
 
@@ -41,6 +49,6 @@ mongoose.connect(`mongodb://localhost:27017`,{ useNewUrlParser : true })
     .catch(err => console.log(err))
 
 
-    app.listen(4123,() => {
-        console.log("Server is running in port 4123");
-    })
+    // app.listen(4123,() => {
+    //     console.log("Server is running in port 4123");
+    // })

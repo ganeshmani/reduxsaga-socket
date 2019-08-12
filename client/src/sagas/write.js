@@ -8,8 +8,8 @@ export function* write(socket) {
 
   while (true) {
 
-    const {title} = yield take(ADD_TODO)
-
-    socket.emit('insert-todo', title)
+    const {todo} = yield take(ADD_TODO)
+    console.log("saga title",todo);
+    socket.emit('insert-todo', todo.title)
   }
 }

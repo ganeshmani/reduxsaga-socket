@@ -12,13 +12,15 @@ const TodoInput = (props)  => {
         props.addTodo({
             title : todo
         })
+
+        setTodo('')
     }
 
     return (
-        <div class="ui center aligned container">
-            <div class="ui fluid action input">
+        <div className="ui center aligned container">
+            <div className="ui fluid action input">
                 <input type="text" value={todo} onChange = { (e) => setTodo(e.target.value) }  placeholder="Add Todo..." />
-                <div class="ui button" onClick={ () => addTodo() }>Add</div>
+                <div className="ui button" onClick={ () => addTodo() }>Add</div>
             </div>
         </div>
     )
