@@ -1,7 +1,4 @@
-import {
-    GET_TODOS,
-    ON_TODO_ADDED
-} from '../actions/actionTypes';
+import { ON_TODO_ADDED } from '../actions/actionTypes';
 
 const initialState = {
    todos : []
@@ -14,7 +11,6 @@ export default function todos(state = initialState, action) {
           ...state,
           todos : action.payload.todos
         }
-        break;
       default:
         return state
     }
