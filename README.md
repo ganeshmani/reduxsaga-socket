@@ -26,6 +26,7 @@ This is a POC Application for Managing the Real-time Data in React Application u
 ```
 
 ### To run Server
+First, make sure MongoDB is running on your server. 
 
 ```
  cd server
@@ -33,3 +34,10 @@ This is a POC Application for Managing the Real-time Data in React Application u
  node server.js
 ``` 
 
+### To run MongoDB
+Install MongoDB from [here](https://www.mongodb.com/).
+After it is installed, run it from a terminal window:
+```
+mongod
+```
+It should be running on port 27017.

@@ -9,11 +9,11 @@ import { GET_TODOS } from './actions/actionTypes';
 import { connect } from 'react-redux'
 
 import TodoList from './components/TodoList'
-function App(props) {
+function App({start}) {
 
   useEffect(() => {
-      props.start();
-  },[])
+      start();
+  },[start])
 
   return (
     <div className="App">
